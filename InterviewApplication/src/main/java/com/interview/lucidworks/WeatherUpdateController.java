@@ -28,11 +28,15 @@ import java.util.Map;
 public class WeatherUpdateController {
     @Autowired
     private AccountService accountService;
+    static final int DELAY=1000;
+    static final int MAXDELAY=15000;
+    static  int MULTIPLIER=3;
+
 
     @Retryable(value = {IOException.class, JSONException.class},
-            maxAttempts = 5,
-            backoff = @Backoff(delay= 1000,
-                    maxDelay = 5000, multiplier = 3.1))
+            maxAttemptsExpression = "#{${my.app.maxAttempts}}",
+            backoff = @Backoff(delayExpression = "#{${my.app.backOffDelay}}",
+                    maxDelayExpression = "#{${my.app.maxDelay}}", multiplierExpression = "#{${my.app.multiplier}}"))
     @RequestMapping(value = "/weather", method = RequestMethod.GET, produces = "application/json")
     public Map<String, String> home(HttpServletRequest request, HttpServletResponse response,@RequestBody String city) throws IOException, ForecastException {
 
@@ -60,11 +64,12 @@ public class WeatherUpdateController {
                 DarkSkyClient client = new DarkSkyClient();
                 String forecast = client.forecastJsonString(requestWeather);
                 JSONObject json = new JSONObject(forecast);
-                System.out.println(json);
+                //System.out.println(json);
+                System.out.println("RETRYING TO FETCH CORRECT DATA");
                 JSONObject current= (JSONObject)json.get("currently");
                 String time = current.get("time").toString();
                 String temp = current.get("temprature").toString();
-                System.out.println(time+ ""+ temp);
+               // System.out.println(time+ ""+ temp);
                 map.put("Weather:",forecast);
 
                 return map;
@@ -91,5 +96,67 @@ public class WeatherUpdateController {
         map.put("Error:  ","Some Exception Occured");
         return map;
     }
+
+    @Retryable(value = {IOException.class, JSONException.class},
+    maxAttemptsExpression = "#{${my.app.maxAttempts}}",
+    backoff = @Backoff(delayExpression = "#{${my.app.backOffDelay}}",
+            maxDelayExpression = "#{${my.app.maxDelay}}", multiplierExpression = "#{${my.app.multiplier}}"))
+    @RequestMapping(value = "/weatherC", method = RequestMethod.GET, produces = "application/json")
+    public Map<String, String> homeCorrect(HttpServletRequest request, HttpServletResponse response,@RequestBody String city) throws IOException, ForecastException {
+
+        Map<String, String > map = new HashMap<>();
+
+        String basicAuthHeaders = request.getHeader("Authorization");
+        String[] credentials = null;
+
+        if (basicAuthHeaders != null && basicAuthHeaders.startsWith("Basic")) {
+            String tok = basicAuthHeaders.substring("Basic ".length()).trim();
+            credentials = TokenDecoder.decodeToken(tok);
+            User currentUser = accountService.findAccount(credentials[0]);
+            //System.out.println(currentUser.getEmail() + "   " + credentials[1] + "   " + currentUser.getPassword());
+            PasswordUtil.checkPass(credentials[1], currentUser.getPassword());
+            if (currentUser != null && currentUser.getEmail().equalsIgnoreCase(credentials[0]) && PasswordUtil.verifyUserPassword(credentials[1], currentUser.getPassword())) {
+                ForecastRequest requestWeather = new ForecastRequestBuilder()
+                        .key(new APIKey("43a2391960ce6f27dc01dc5ce90512e1"))
+                        .time(Instant.now().minus(5, ChronoUnit.DAYS))
+                        .language(ForecastRequestBuilder.Language.de)
+                        .units(ForecastRequestBuilder.Units.us)
+                        .exclude(ForecastRequestBuilder.Block.minutely)
+                        .extendHourly()
+                        .location(new GeoCoordinates(new Longitude(13.377704), new Latitude(52.516275))).build();
+
+                DarkSkyClient client = new DarkSkyClient();
+                String forecast = client.forecastJsonString(requestWeather);
+
+
+
+
+                map.put("Weather:",forecast);
+
+                return map;
+            }
+        }
+        else {
+            map = new HashMap<>();
+            map.put("Error", "You are currently not logged in!");
+            response.setStatus(401);
+            return map;
+        }
+        return null;
+    }
+    @Recover
+    public Map<String,String> recoverCorrect(IOException e){
+        Map<String,String> map = new HashMap<>();
+        map.put("Error:  ","Could not reach remote website");
+        return null;
+    }
+
+    @Recover
+    public Map<String,String> recoverJSONCorrect(JSONException e){
+        Map<String,String> map = new HashMap<>();
+        map.put("Error:  ","JSONException Occured");
+        return map;
+    }
+    
     }
 
