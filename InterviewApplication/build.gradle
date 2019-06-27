@@ -39,6 +39,11 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework.retry/spring-retry
     compile group: 'org.springframework.retry', name: 'spring-retry', version: '1.2.4.RELEASE'
 
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.4.3.Final'
+    compile group: 'xerces', name: 'xmlParserAPIs', version: '2.6.2'
+    compile group: 'net.aksingh', name: 'owm-japis', version: '2.5.0.3'
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.9'
+    compile group: 'tk.plogitech', name: 'darksky-forecast-api-jackson', version: '0.10'
 
 }
 
