@@ -28,6 +28,7 @@ import java.util.Map;
 public class WeatherUpdateController {
     @Autowired
     private AccountService accountService;
+
     static final int DELAY=1000;
     static final int MAXDELAY=15000;
     static  int MULTIPLIER=3;
@@ -38,7 +39,7 @@ public class WeatherUpdateController {
             backoff = @Backoff(delayExpression = "#{${my.app.backOffDelay}}",
                     maxDelayExpression = "#{${my.app.maxDelay}}", multiplierExpression = "#{${my.app.multiplier}}"))
     @RequestMapping(value = "/weather", method = RequestMethod.GET, produces = "application/json")
-    public Map<String, String> home(HttpServletRequest request, HttpServletResponse response,@RequestBody String city) throws IOException, ForecastException {
+    public Map<String, String> home(HttpServletRequest request, HttpServletResponse response) throws IOException, ForecastException {
 
         Map<String, String > map = new HashMap<>();
 

@@ -44,6 +44,14 @@ dependencies {
     compile group: 'net.aksingh', name: 'owm-japis', version: '2.5.0.3'
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.9'
     compile group: 'tk.plogitech', name: 'darksky-forecast-api-jackson', version: '0.10'
+    // https://mvnrepository.com/artifact/org.springframework/spring-test
+    testCompile group: 'org.springframework', name: 'spring-test', version: '2.5'
+    // https://mvnrepository.com/artifact/junit/junit
+    testCompile group: 'junit', name: 'junit', version: '4.4'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.1.5.RELEASE'
+
+
 
 }
 
