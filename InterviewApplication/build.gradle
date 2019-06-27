@@ -16,7 +16,10 @@ configurations {
         extendsFrom developmentOnly
     }
 }
-
+bootJar {
+    launchScript()
+}
+ 
 repositories {
     mavenCentral()
 }
@@ -26,6 +29,7 @@ ext {
 }
 
 dependencies {
+   
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
     implementation 'org.springframework.session:spring-session-core'
@@ -54,6 +58,14 @@ dependencies {
 
 
 }
+jar{
+	enabled = true
+
+    manifest{
+        attributes 'Main-Class':'com.interview.lucidworks.LucidworksApplication'
+    }
+}
+
 
 test {
     outputs.dir snippetsDir
