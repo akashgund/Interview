@@ -75,8 +75,7 @@
     **Content:** `{ error : " User registration could not be done" }`
 
 
-
-
+----------------------------------------------------------------
 
 * **URL**
 
@@ -113,7 +112,7 @@
 
     **Content:** `{ error : " Could not create note" }`
 
-
+---------------------------------------------------------------------------------------
 
 * **URL**
 
@@ -145,7 +144,7 @@
 
     **Content:** `{ error : "No notes exist for the user" }`
 
-
+--------------------------------------------------------------------------------
 
 * **URL**
 
@@ -180,8 +179,7 @@
 
     **Content:** `{ error : " Could not create note" }`
 
-
-
+-------------------------------------------------------------------------------------
 
 * **URL**
 
@@ -211,9 +209,7 @@
 * **Error Response:**
 
     **Content:** `{ error : " Some system error occured!" }`
-
-
-
+-----------------------------------------------------------------------------------------------
 
 * **URL**
 This URL is made to demo @RETRY functionality.
@@ -243,17 +239,17 @@ This URL is made to demo @RETRY functionality.
 * **Error Response:**
 
     **Content:** `{ error : " Some system error occured!" }`
-
-
-
+-------------------------------------------------------------------------------------------------------
 
 
 **Notes:**
 
 *  Shell scripts to run call-http comands can be found in Interview/Scripts directory
 *  Shell Scripts to run application as deamon service can be found in Interview/Scripts/DeamonService directory
+---------------------------------------------------------------------------------------------------------------------
 
 **SAMPLE EXECUTION**
+* cd to /Interview/Scripts
 
 * ./call-http --method post --data '{"content":"new note","title":"new note "}' --target  http://localhost:8080/note
 
