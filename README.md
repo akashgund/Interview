@@ -16,7 +16,7 @@
 
 **URL ENDPOINTS**
 
-* **URL **
+* **URL**
 
  http://localhost:8080/ user
 * **Method:**
@@ -80,7 +80,7 @@
 
 * **URL**
 
- http://localhost:8080/note
+   http://localhost:8080/note
 * **Method:**
   
   The request type
