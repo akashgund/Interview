@@ -134,11 +134,7 @@ public class PasswordUtil {
         // Generate New secure password with the same salt
         String newSecurePassword = encodePass(plainTextPassword);
 
-        // Check if two passwords are equal
-        System.out.println(plainTextPassword+"             "+ newSecurePassword+"               "+ securedPassword);
         returnValue = newSecurePassword.equalsIgnoreCase(securedPassword);
-        System.out.println(returnValue);
-
         return returnValue;
     }
 
