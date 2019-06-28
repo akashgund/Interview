@@ -12,8 +12,8 @@
 *   The app should work through REST API calls the same as the command line and
     follow REST best practices
 *   The app should have automatic retries with a configurable policy (number of
-    retries, exponential backoff, timeouts)
-   **Optional bonus features**
+    retries, exponential backoff, timeouts)<br/> 
+    **Optional bonus features**
    
 *   Add a "debug" option which displays additional information about the request
    (response metadata, request timing, etc)
