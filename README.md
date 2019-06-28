@@ -1,10 +1,22 @@
-# Interview
+# Interview Lucidworks
 
-**Title**
-----
+**HTTP Utiltity Application**
+----------------------------------
  Interview Application
+ 
+ **REQUIREMENTS**
+*   Java 1.8
+*   The Utility should be a SpringBoot App
+*   The app should work from the command line for setting the request params as
+    well as other options
+*   The app should work through REST API calls the same as the command line and
+    follow REST best practices
+*   The app should have automatic retries with a configurable policy (number of
+    retries, exponential backoff, timeouts)
 
-* **URL**
+**URL ENDPOINTS**
+
+ **URL **
 
  http://localhost:8080/ user
 * **Method:**
@@ -25,14 +37,8 @@
 
 * **Data Params**
 
-  <_If making a post request, what should the body payload look like? URL Params rules apply here too._>
-
-
   * **Code:** 200 <br />
     **Content:** `{ RETURNS A LIST OF URLS for the application }`
-
-
-
 
 * **URL**
 
@@ -43,7 +49,6 @@
 
   `POST`
   
-
    **Optional:**
  
    `--debug`
@@ -54,7 +59,9 @@
  ./call-http --method post --data {"email":"xyz@gmail.com", "password":"**********"} --target http://localhost:8080/user/register --timeout 10  
 
 * **Data Params**
- {"email":"xyz@gmail.com", "password":"**********"}
+ * email
+ * password
+ * format:  {"email":"xyz@gmail.com", "password":"**********"}
  
 
 * **Success Response:**
@@ -91,7 +98,9 @@
  ./call-http --method post --data {"title":"TITLE GOES HERE", "content":"CONTENT GOES HERE"} --target http://localhost:8080/user/register --timeout 10  
 
 * **Data Params**
- {"title":"TITLE GOES HERE", "content":"CONTENT GOES HERE"}
+  * title
+  * content
+  * format: {"title":"TITLE GOES HERE", "content":"CONTENT GOES HERE"}
  
 
 * **Success Response:**
@@ -239,6 +248,14 @@ This URL is made to demo @RETRY functionality.
 
 
 
-* **Notes:**
+**Notes:**
 
-  <_This is where all uncertainties, commentary, discussion etc. can go. I recommend timestamping and identifying oneself when leaving comments here._> 
+*  Shell scripts to run call-http comands can be found in Interview/Scripts directory
+*  Shell Scripts to run application as deamon service can be found in Interview/Scripts/DeamonService directory
+
+**SAMPLE EXECUTION**
+
+* ./call-http --method post --data '{"content":"new note","title":"new note "}' --target  http://localhost:8080/note
+
+
+
