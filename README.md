@@ -13,7 +13,16 @@
     follow REST best practices
 *   The app should have automatic retries with a configurable policy (number of
     retries, exponential backoff, timeouts)
-
+   **Optional bonus features**
+   
+*   Add a "debug" option which displays additional information about the request
+   (response metadata, request timing, etc)
+*  Input validation of params
+*  Unit tests for retry strategies and other "units"
+*  Integration test that starts an HTTP server and tests the utility
+*  Proper use of HTTP status codes
+*  Use Gradle as the build tool
+--------------------------------------------------------------------------------------------    
 **URL ENDPOINTS**
 
 * **URL**
