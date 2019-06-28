@@ -130,7 +130,10 @@ public class EntryController{
 
 
         } catch (Exception e) {
-            throw new IOException("Error parsing JSON " + e.getMessage());
+           
+            map.put("Error"," Please check input json");
+            return map;
+            //throw new IOException("Error parsing JSON " + e.getMessage());
         }
     }
 

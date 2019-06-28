@@ -50,7 +50,12 @@ public class DisplayNotesController {
             String tok = basicAuthHeaders.substring("Basic ".length()).trim();
             credentials = TokenDecoder.decodeToken(tok);
             User currentUser = accountService.findAccount(credentials[0]);
-            System.out.println(currentUser.getEmail()+"   "+credentials[1]+"   "+currentUser.getPassword());
+            if(currentUser ==null){
+                map = new HashMap<>();
+                map.put("Error", "Invalid User!");
+                response.setStatus(400);
+                return map;
+            }
             PasswordUtil.checkPass(credentials[1], currentUser.getPassword());
             if (currentUser != null && PasswordUtil.verifyUserPassword(credentials[1], currentUser.getPassword())) {
                 ArrayList<Note> noteList = null;

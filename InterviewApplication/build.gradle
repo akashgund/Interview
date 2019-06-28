@@ -59,7 +59,6 @@ dependencies {
 
 }
 jar{
-	enabled = true
 
     manifest{
         attributes 'Main-Class':'com.interview.lucidworks.LucidworksApplication'
