@@ -16,7 +16,7 @@
 
 **URL ENDPOINTS**
 
- **URL **
+* **URL **
 
  http://localhost:8080/ user
 * **Method:**
