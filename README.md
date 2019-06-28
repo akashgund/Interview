@@ -1,8 +1,8 @@
-# Interview Lucidworks
+# Interview : Lucidworks
 
 **HTTP Utiltity Application**
 ----------------------------------
- Interview Application
+
  
  **REQUIREMENTS**
 *   Java 1.8
@@ -39,7 +39,7 @@
 
   * **Code:** 200 <br />
     **Content:** `{ RETURNS A LIST OF URLS for the application }`
-
+----------------------------------
 * **URL**
 
  http://localhost:8080/user/register
