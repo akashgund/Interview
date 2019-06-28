@@ -248,10 +248,16 @@ This URL is made to demo @RETRY functionality.
 *  Shell Scripts to run application as deamon service can be found in Interview/Scripts/DeamonService directory
 ---------------------------------------------------------------------------------------------------------------------
 
-**SAMPLE EXECUTION**
+**SAMPLE EXECUTION for Interactive Mode**
 * cd to /Interview/Scripts
 
 * ./call-http --method post --data '{"content":"new note","title":"new note "}' --target  http://localhost:8080/note
+
+--------------------------------------------------------------------------------------------------------------------
+**SAMPLE EXECUTION for Deamon Mode**
+* cd to /Interview/Scripts/DeamonService
+
+* curl --request POST -H "Content-Type: application/json" --data '{"content":"new note","title":"new note "}' http://localhost:8080/note --connect-timeout 10
 
 
 
