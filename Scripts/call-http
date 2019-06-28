@@ -1,0 +1,62 @@
+#!/bin/bash
+method=""
+target=""
+timeout=10
+debug=""
+data=""
+while test "$1"; do
+  case "$1" in
+    --method) method="$2";;
+    --target) target="$2";;
+    --timeout) timeout="$2";;
+	--debug) debug="true";;
+	--daemon) echo "DAEMON";;
+	--data) data="$2";;
+  esac
+  shift
+done
+. ./config.sh
+cat url.txt
+echo "$target" > url.txt
+
+if [ "$method" == 'post' ]
+then
+	check=$(sed 's/http:\/\/localhost:8080\///g' url.txt)	
+	if [ "$check" == 'user/register' ]
+	then
+		if [ "$debug" == 'true' ]
+		then
+			Response=$(curl -v --request POST -H "Content-Type: application/json" --data "$data" "$target" --connect-timeout $timeout)
+			echo "$Response"
+		else
+			Response=$(curl --request POST -H "Content-Type: application/json" --data "$data" "$target" --connect-timeout $timeout)
+			echo "$Response"
+		fi
+	fi
+	if [ "$check" == 'note' ]
+	then
+		if [ "$debug" == 'true' ]
+		then
+			Response=$(curl -v --user $username:$password --request POST -H "Content-Type: application/json" --data "$data" "$target" --connect-timeout $timeout)
+			echo "$Response"
+		else
+			Response=$(curl --user $username:$password --request POST -H "Content-Type: application/json" --data "$data" "$target" --connect-timeout $timeout)
+			echo "$Response"
+		fi
+	fi
+fi
+if [ "$method" == 'get' ]
+then
+	if [ "$debug" == 'true' ]
+	then
+		Response=$(curl -v --user $username:$password $target --connect-timeout $timeout)
+		echo "$Response"
+		
+	else
+		
+		Response=$(curl --user $username:$password $target --connect-timeout $timeout)
+		echo "$Response"
+	fi
+fi
+
+
